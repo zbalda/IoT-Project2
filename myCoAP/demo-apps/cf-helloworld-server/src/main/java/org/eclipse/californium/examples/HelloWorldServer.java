@@ -69,29 +69,54 @@ public class HelloWorldServer extends CoapServer {
      */
     public HelloWorldServer() throws SocketException {
         
-        // provide an instance of a Hello-World resource
-        add(new HelloWorldResource());
+        // provide an instance of a Temperature resource
+        add(new TemperatureResource());
+        
+        // provide an instance of a Second resource
+        add(new SecondResource());
     }
 
     /*
-     * Definition of the Hello-World Resource
+     * Definition of the Temperature Resource
      */
-    class HelloWorldResource extends CoapResource {
+    class TemperatureResource extends CoapResource {
         
-        public HelloWorldResource() {
+        public TemperatureResource() {
             
             // set resource identifier
-            super("helloWorld");
+            super("temperature");
             
             // set display name
-            getAttributes().setTitle("Hello-World Resource");
+            getAttributes().setTitle("Temperature Resource");
         }
 
         @Override
         public void handleGET(CoapExchange exchange) {
             
             // respond to the request
-            exchange.respond("Hello World!");
+            exchange.respond("Temperature!");
+        }
+    }
+    
+    /*
+     * Definition of the Second Resource
+     */
+    class SecondResource extends CoapResource {
+        
+        public SecondResource() {
+            
+            // set resource identifier
+            super("second");
+            
+            // set display name
+            getAttributes().setTitle("Second Resource");
+        }
+
+        @Override
+        public void handleGET(CoapExchange exchange) {
+            
+            // respond to the request
+            exchange.respond("Second!");
         }
     }
 }
