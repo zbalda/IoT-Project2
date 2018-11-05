@@ -28,8 +28,21 @@ import org.eclipse.californium.core.network.EndpointManager;
 import org.eclipse.californium.core.network.config.NetworkConfig;
 import org.eclipse.californium.core.server.resources.CoapExchange;
 
+// temperature sensor
+import com.pi4j.io.gpio.*;
+import com.pi4j.io.w1.W1Master;
+import com.pi4j.io.w1.W1BaseDevice;
+import com.pi4j.temperature.TemperatureScale;
+
 
 public class HelloWorldServer extends CoapServer {
+	
+	// GPIO variables
+	public static GpioController gpio;
+
+	// Sensor variables
+	public static W1Master w1Master;
+	public static W1BaseDevice tempSensor;	
 
 	private static final int COAP_PORT = NetworkConfig.getStandard().getInt(NetworkConfig.Keys.COAP_PORT);
     /*
@@ -68,6 +81,20 @@ public class HelloWorldServer extends CoapServer {
      * of the server are initialized.
      */
     public HelloWorldServer() throws SocketException {
+		
+		// create gpio controller
+		gpio = GpioFactory.getInstance();
+
+		// for getting sensor device
+		w1Master = new W1Master();
+		
+		// provision temperature sensor
+		for(W1BaseDevice device : w1Master.getDevices(W1BaseDevice.class)){
+			System.out.println(device.getName());
+			//if(device.getName().contains("28-0000075565ad")){
+			//	sensor = device;
+			//}
+		}
         
         // provide an instance of a Temperature resource
         add(new TemperatureResource());
@@ -92,9 +119,15 @@ public class HelloWorldServer extends CoapServer {
 
         @Override
         public void handleGET(CoapExchange exchange) {
+			
+			try {
+				String temp = tempSensor.getValue();
+			} catch (IOException e) {
+				System.err.println("Failed to get temperature from sensor: " + e.getMessage());
+			}
             
             // respond to the request
-            exchange.respond("Temperature!");
+            exchange.respond(temp);
         }
     }
     
