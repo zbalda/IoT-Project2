@@ -12,7 +12,7 @@ import com.pi4j.component.temperature.TemperatureSensor;
 import com.pi4j.io.w1.W1Master;
 import com.pi4j.temperature.TemperatureScale;
 
-public class Step3 {
+public class Proj1Step3 {
 
 	// GPIO variables
 	public static GpioController gpio;
@@ -22,13 +22,13 @@ public class Step3 {
 	public static TemperatureSensor sensor;
 	public static double tempCelsius;
 
-	public Step3() {
+	public Proj1Step3() {
 		// create gpio controller
 		gpio = GpioFactory.getInstance();
 
 		// for getting sensor device
 		w1Master = new W1Master();
-
+		
 		// provision temperature sensor
 		for(TemperatureSensor device : w1Master.getDevices(TemperatureSensor.class)){
 			if(device.getName().contains("28-0000075565ad")){
@@ -45,17 +45,13 @@ public class Step3 {
 
 	public static void main(String args[]) throws InterruptedException {
 
-		new Step3();
+		new Proj1Step3();
 
 		// keep program running until user aborts (CTRL-C)
 		while(true) {
 			updateTemp();
 			Thread.sleep(100);
 		}
-
-		// stop all GPIO activity/threads by shutting down the GPIO controller
-		// (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
-		// gpio.shutdown();   <--- implem
 		
 	}
 	
