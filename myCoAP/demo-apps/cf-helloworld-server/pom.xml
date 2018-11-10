@@ -41,6 +41,11 @@
 			<artifactId>pi4j-device</artifactId>
 			<version>1.2.M1</version>
 		</dependency>
+		<dependency>
+    			<groupId>org.webjars.npm</groupId>
+    			<artifactId>gpio</artifactId>
+    			<version>0.2.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>
