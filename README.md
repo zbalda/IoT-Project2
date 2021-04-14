@@ -52,7 +52,7 @@ After getting the program to compile with the correct dependencies our CoAP serv
 The goal for this section is to use the Wireshark software to view the CoAP packets that are being transferred between the client and the Raspberry Pi.
 
 #### Analysis
-Below is a snapshot of the packets to and from the Raspberry Pi. We observed that the CoAP packets are significantly smaller on average. Additionally, we observed the ACK, which contained the data after every request for data.
+Below is a snapshot of the packets to and from the Raspberry Pi. We saw that the CoAP packets are significantly smaller on average. Additionally, we saw the ACK, which contained the data after every request for data.
 
 ![Step2 Diagram](https://github.com/zbalda/IoT-Project2/blob/master/WireShark_Capture.PNG)
 
