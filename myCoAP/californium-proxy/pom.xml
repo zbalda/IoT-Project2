@@ -17,7 +17,7 @@
 	<description>Cross-proxy module</description>
 
 	<properties>
-		<httpcomponents.version>4.2.5</httpcomponents.version>
+		<httpcomponents.version>4.5.13</httpcomponents.version>
 		<httpcomponents.version.lowerbound>4.2</httpcomponents.version.lowerbound>
 		<httpcomponents.version.upperbound>5</httpcomponents.version.upperbound>
 	</properties>
